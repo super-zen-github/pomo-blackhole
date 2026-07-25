@@ -1,31 +1,41 @@
-# 黑洞番茄钟
+# Black Hole Pomodoro
 
-一个 macOS 14+ 菜单栏番茄时钟。专注过程中，桌面上的黑洞会持续长大；实时模式使用
-ScreenCaptureKit 和 Metal 扭曲黑洞周围的真实桌面内容，纯视觉模式不需要录屏权限。
+A macOS 14+ menu bar Pomodoro timer visualized as a growing black hole on your
+desktop. In live mode, ScreenCaptureKit and Metal distort the actual desktop
+content around the black hole. Visual-only mode works without screen-recording
+permission.
 
-## 当前功能
+[中文说明](README.zh-CN.md)
 
-- 自定义专注、短休息、长休息时长和轮次
-- 菜单栏开始、暂停、继续、跳过和重置
-- 可拖动、工作时鼠标穿透的透明黑洞窗口
-- 30 FPS Metal 黑洞、吸积盘、引力透镜、粒子及坍缩动画
-- ScreenCaptureKit 实时桌面扭曲，失败时自动回退纯视觉模式
-- 多显示器跟随、状态持久化和完成通知
+## Features
 
-## 构建
+- Custom focus, short-break, and long-break durations and round count
+- Start, pause, resume, skip, and reset controls from the menu bar
+- A draggable transparent black-hole window that ignores mouse input while active
+- A 30 FPS Metal-rendered black hole with an accretion disk, gravitational lensing,
+  particles, and collapse animation
+- Real-time desktop distortion powered by ScreenCaptureKit, with automatic fallback
+  to visual-only mode
+- Multi-display support, persistent state, and completion notifications
 
-开发构建与测试：
+## Build
+
+Build and run the tests:
 
 ```sh
 swift test
 ```
 
-生成可直接运行的临时签名应用：
+Build an ad-hoc signed application that can be launched directly:
 
 ```sh
 ./scripts/build-app.sh
 open .build/BlackHolePomodoro.app
 ```
 
-首次切换到“实时桌面扭曲”后，请在“系统设置 → 隐私与安全性 → 屏幕与系统音频录制”
-中允许黑洞番茄钟，然后重新启动应用。正式分发时应使用 Apple Developer ID 签名替换临时签名。
+After enabling live desktop distortion for the first time, grant Black Hole
+Pomodoro access under **System Settings → Privacy & Security → Screen & System
+Audio Recording**, then restart the application.
+
+For public distribution, replace the ad-hoc signature with an Apple Developer ID
+signature.
