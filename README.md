@@ -39,3 +39,7 @@ Audio Recording**, then restart the application.
 
 For public distribution, replace the ad-hoc signature with an Apple Developer ID
 signature.
+
+## License
+
+This project is available under the [MIT License](LICENSE).

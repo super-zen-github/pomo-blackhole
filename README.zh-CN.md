@@ -29,3 +29,7 @@ open .build/BlackHolePomodoro.app
 
 首次切换到“实时桌面扭曲”后，请在“系统设置 → 隐私与安全性 → 屏幕与系统音频录制”
 中允许黑洞番茄钟，然后重新启动应用。正式分发时应使用 Apple Developer ID 签名替换临时签名。
+
+## 许可证
+
+本项目采用 [MIT License](LICENSE) 开源。
