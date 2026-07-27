@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>CFBundleDevelopmentRegion</key>
-    <string>zh_CN</string>
+    <string>en</string>
     <key>CFBundleExecutable</key>
     <string>PomoBlackHole</string>
     <key>CFBundleIdentifier</key>
@@ -11,7 +11,7 @@
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>
-    <string>黑洞番茄钟</string>
+    <string>Black Hole Pomodoro</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
@@ -23,6 +23,6 @@
     <key>LSUIElement</key>
     <true/>
     <key>NSScreenCaptureUsageDescription</key>
-    <string>用于在黑洞周围实时扭曲桌面画面。屏幕内容不会被保存或上传。</string>
+    <string>Used to distort the desktop around the black hole in real time. Screen content is never saved or uploaded.</string>
 </dict>
 </plist>

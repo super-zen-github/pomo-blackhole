@@ -7,8 +7,9 @@ enum VisualMode: String, Codable, CaseIterable {
     case liveDistortion
     case overlayOnly
 
+    @MainActor
     var title: String {
-        self == .liveDistortion ? "实时桌面扭曲" : "纯视觉模式"
+        self == .liveDistortion ? L.text("Live Desktop Distortion") : L.text("Visual Only")
     }
 }
 
@@ -17,6 +18,14 @@ final class AppModel: ObservableObject {
     @Published private(set) var engine: TimerEngine
     @Published var visualMode: VisualMode {
         didSet { defaults.set(visualMode.rawValue, forKey: Keys.visualMode) }
+    }
+    @Published var appLanguage: AppLanguage {
+        didSet {
+            L.language = appLanguage
+            defaults.set(appLanguage.rawValue, forKey: Keys.appLanguage)
+            onUpdate?()
+            objectWillChange.send()
+        }
     }
     @Published var isRepositioning = false
 
@@ -30,6 +39,7 @@ final class AppModel: ObservableObject {
         static let engine = "timer.engine"
         static let configuration = "timer.configuration"
         static let visualMode = "visual.mode"
+        static let appLanguage = "app.language"
     }
 
     init() {
@@ -44,6 +54,8 @@ final class AppModel: ObservableObject {
             engine = TimerEngine()
         }
         visualMode = VisualMode(rawValue: savedDefaults.string(forKey: Keys.visualMode) ?? "") ?? .overlayOnly
+        appLanguage = AppLanguage(rawValue: savedDefaults.string(forKey: Keys.appLanguage) ?? "") ?? .system
+        L.language = appLanguage
         ticker = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
             Task { @MainActor in self?.tick() }
         }
@@ -118,8 +130,12 @@ final class AppModel: ObservableObject {
 
     private func notifyCompletion() {
         let content = UNMutableNotificationContent()
-        content.title = engine.underlyingPhase == .focus ? "专注完成" : "休息结束"
-        content.body = engine.underlyingPhase == .focus ? "黑洞已经坍缩，休息一下吧。" : "准备开始下一轮专注。"
+        content.title = engine.underlyingPhase == .focus
+            ? L.text("Focus Complete")
+            : L.text("Break Complete")
+        content.body = engine.underlyingPhase == .focus
+            ? L.text("The black hole has collapsed. Time for a break.")
+            : L.text("Ready for your next focus session.")
         content.sound = .default
         UNUserNotificationCenter.current().add(UNNotificationRequest(
             identifier: UUID().uuidString,

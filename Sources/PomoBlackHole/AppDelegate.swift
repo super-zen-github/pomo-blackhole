@@ -16,13 +16,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         model.onUpdate = { [weak self] in
             self?.overlay?.update()
             self?.refreshStatusTitle()
+            self?.settings?.refreshLocalization()
         }
         refreshStatusTitle()
     }
 
     private func setupStatusItem() {
         let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-        item.button?.image = NSImage(systemSymbolName: "circle.dotted", accessibilityDescription: "黑洞番茄钟")
+        item.button?.image = NSImage(
+            systemSymbolName: "circle.dotted",
+            accessibilityDescription: L.text("Black Hole Pomodoro")
+        )
         item.button?.imagePosition = .imageLeading
         menu.delegate = self
         item.menu = menu
@@ -37,12 +41,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     private func rebuildMenu() {
         menu.removeAllItems()
         let phaseName = switch model.phase {
-        case .idle: "尚未开始"
-        case .focus: "专注中"
-        case .shortBreak: "短休息"
-        case .longBreak: "长休息"
-        case .paused: "已暂停"
-        case .completing: "正在坍缩"
+        case .idle: L.text("Not started")
+        case .focus: L.text("Focusing")
+        case .shortBreak: L.text("Short break")
+        case .longBreak: L.text("Long break")
+        case .paused: L.text("Paused")
+        case .completing: L.text("Collapsing")
         }
         let info = NSMenuItem(title: "\(phaseName) · \(formatted(model.remaining))", action: nil, keyEquivalent: "")
         info.isEnabled = false
@@ -50,25 +54,25 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         menu.addItem(.separator())
 
         let primaryTitle = switch model.phase {
-        case .idle: "开始专注"
-        case .paused: "继续"
-        case .focus, .shortBreak, .longBreak: "暂停"
-        case .completing: "完成中…"
+        case .idle: L.text("Start Focus")
+        case .paused: L.text("Resume")
+        case .focus, .shortBreak, .longBreak: L.text("Pause")
+        case .completing: L.text("Finishing…")
         }
         menu.addItem(withTitle: primaryTitle, action: #selector(toggleTimer), keyEquivalent: " ")
-        menu.addItem(withTitle: "跳过当前阶段", action: #selector(skip), keyEquivalent: "")
-        menu.addItem(withTitle: "重置", action: #selector(reset), keyEquivalent: "")
+        menu.addItem(withTitle: L.text("Skip Current Phase"), action: #selector(skip), keyEquivalent: "")
+        menu.addItem(withTitle: L.text("Reset"), action: #selector(reset), keyEquivalent: "")
         menu.addItem(.separator())
 
         let reposition = menu.addItem(
-            withTitle: model.isRepositioning ? "完成移动" : "移动黑洞",
+            withTitle: model.isRepositioning ? L.text("Finish Moving") : L.text("Move Black Hole"),
             action: #selector(toggleReposition),
             keyEquivalent: ""
         )
         reposition.state = model.isRepositioning ? .on : .off
-        menu.addItem(withTitle: "设置…", action: #selector(showSettings), keyEquivalent: ",")
+        menu.addItem(withTitle: L.text("Settings…"), action: #selector(showSettings), keyEquivalent: ",")
         menu.addItem(.separator())
-        menu.addItem(withTitle: "退出黑洞番茄钟", action: #selector(quit), keyEquivalent: "q")
+        menu.addItem(withTitle: L.text("Quit Black Hole Pomodoro"), action: #selector(quit), keyEquivalent: "q")
 
         for item in menu.items where item.action != nil { item.target = self }
     }

@@ -1,0 +1,3 @@
+"CFBundleDisplayName" = "Black Hole Pomodoro";
+"CFBundleName" = "Black Hole Pomodoro";
+"NSScreenCaptureUsageDescription" = "Used to distort the desktop around the black hole in real time. Screen content is never saved or uploaded.";
