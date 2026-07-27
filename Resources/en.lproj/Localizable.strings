@@ -31,6 +31,7 @@
 "Screen Recording permission is required in System Settings. The app falls back to Visual Only mode if capture fails." = "Screen Recording permission is required in System Settings. The app falls back to Visual Only mode if capture fails.";
 "Does not read screen content. Uses a glow and particles to simulate the pull." = "Does not read screen content. Uses a glow and particles to simulate the pull.";
 "Save" = "Save";
+"Saved" = "Saved";
 "Black Hole Pomodoro Settings" = "Black Hole Pomodoro Settings";
 "Language" = "Language";
 "App Language" = "App Language";

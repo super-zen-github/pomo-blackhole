@@ -31,6 +31,7 @@
 "Screen Recording permission is required in System Settings. The app falls back to Visual Only mode if capture fails." = "需要在系统设置中授予屏幕录制权限。失败时自动切换纯视觉模式。";
 "Does not read screen content. Uses a glow and particles to simulate the pull." = "不读取屏幕内容，使用光环和粒子模拟吸入效果。";
 "Save" = "保存";
+"Saved" = "已保存";
 "Black Hole Pomodoro Settings" = "黑洞番茄钟设置";
 "Language" = "语言";
 "App Language" = "应用语言";
